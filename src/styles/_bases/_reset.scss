@@ -1,0 +1,151 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+// ==========================================================================
+// CSS RESET
+// ==========================================================================
+*,
+*::before,
+*::after {
+    box-sizing: border-box
+}
+// setting page default font size
+// font-size: 62.5% -->  10 ÷ 16 × 100% = 62.5%
+// font-size: 62.5% --> 10px
+// font-size: 1.3rem = 13px
+// font-size: 625% 解決 chrome 預設文字問題
+html {
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%
+}
+body {
+    font-family:'Montserrat', sans-serif,"SF Pro TC", "SF Pro Text", "SF Pro Icons", "PingFang TC", 'Segoe UI', 'Microsoft JhengHei', "微軟正黑體", Helvetica, Arial;
+}
+article,
+aside,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+nav,
+section {
+    display: block
+}
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol,
+dl,
+blockquote,
+figure,
+input,
+button,
+select,
+optgroup,
+textarea {
+    margin: 0
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-size: unset
+}
+ul,
+ol,
+dl {
+    padding: 0
+}
+ul,
+ol {
+    list-style: none
+}
+hr {
+    box-sizing: content-box;
+    height: 0;
+    overflow: visible
+}
+img {
+    vertical-align: middle;
+    border-style: none
+}
+table {
+    border-collapse: collapse
+}
+label {
+    display: inline-block
+}
+button {
+    border: none;
+    border-radius: 0
+}
+input,
+button,
+select,
+optgroup,
+textarea {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    &:focus {
+        outline: none
+    }
+}
+button,
+html [type="button"],
+[type="reset"],
+[type="submit"] {
+    -webkit-appearance: button
+}
+button::-moz-focus-inner,
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]::-moz-focus-inner {
+    padding: 0;
+    border-style: none
+}
+input[type="range"],
+input[type="password"],
+input[type="search"],
+input[type="number"],
+input[type="tel"],
+input[type="text"] {
+    -webkit-appearance: none
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0
+}
+input[type="radio"],
+input[type="checkbox"] {
+    box-sizing: border-box;
+    padding: 0
+}
+input {
+    &[type="submit"],
+    &[type="radio"],
+    &[type="checkbox"],
+    &[type="button"],
+    &[type="reset"] {
+        cursor: pointer
+    }
+}
+a {
+    color: #FFFFFF;
+    text-decoration: none;
+    background-color: transparent;
+    &:active,
+    &:hover {
+        outline: 0
+    }
+}

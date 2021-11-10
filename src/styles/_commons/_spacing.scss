@@ -1,0 +1,100 @@
+// ==========================================================================
+// Spacing
+// ==========================================================================
+// Size abbreviation Introduction
+// Extra extra small = xxs
+// Extra small = xs
+// small = sm
+// Medium = md
+// Large = lg
+// Extra large = xl
+// Extra extra large = xxl
+// ==========================================================================
+// Margin property
+// ==========================================================================
+$spacingVariables: ( 
+    xs: 5px,
+    sm: 10px,
+    md: 15px,
+    lg: 20px,
+    xl: 25px,
+    xxl: 30px,
+    auto: auto
+);
+@each $size, $pixel in $spacingVariables {
+    .margin-#{$size} {
+        margin: $pixel
+    }
+}
+// ==========================================================================
+// Margin top property
+// ==========================================================================
+@each $size, $pixel in $spacingVariables {
+    .m-top-#{$size} {
+        margin-top: $pixel
+    }
+}
+// ==========================================================================
+// Margin bottom property
+// ==========================================================================
+@each $size, $pixel in $spacingVariables {
+    .m-bottom-#{$size} {
+        margin-bottom: $pixel
+    }
+}
+// ==========================================================================
+// Margin right property
+// ==========================================================================
+@each $size, $pixel in $spacingVariables {
+    .m-right-#{$size} {
+        margin-right: $pixel
+    }
+}
+// ==========================================================================
+// Margin left property
+// ==========================================================================
+@each $size, $pixel in $spacingVariables {
+    .m-left-#{$size} {
+        margin-left: $pixel
+    }
+}
+// ==========================================================================
+// Padding property
+// ==========================================================================
+@each $size, $pixel in $spacingVariables {
+    .padding-#{$size} {
+        padding: $pixel
+    }
+}
+// ==========================================================================
+// Padding left property
+// ==========================================================================
+@each $size, $pixel in $spacingVariables {
+    .p-left-#{$size} {
+        padding-left: $pixel
+    }
+}
+// ==========================================================================
+// Padding right property
+// ==========================================================================
+@each $size, $pixel in $spacingVariables {
+    .p-right-#{$size} {
+        padding-right: $pixel
+    }
+}
+// ==========================================================================
+// Padding top property
+// ==========================================================================
+@each $size, $pixel in $spacingVariables {
+    .p-top-#{$size} {
+        padding-top: $pixel
+    }
+}
+// ==========================================================================
+// Padding bottom property
+// ==========================================================================
+@each $size, $pixel in $spacingVariables {
+    .p-bottom-#{$size} {
+        padding-bottom: $pixel
+    }
+}
