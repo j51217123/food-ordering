@@ -1,19 +1,34 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
+
+import Modal from "../components/Modal";
+import Portal from "../components/Portal";
 
 import LogoIcon from "../images/Logo.svg";
 import ShoppingBag from "../images/ShoppingBag.svg";
 
 const Index = () => {
   const [productsData, setProductsData] = useState([]);
-
-  const handleAddToCart = () => {
-    alert("alert");
-  };
+  const [currentProductData, setCurrentProductData] = useState(null);
+  const [isOpenModal, setIsOpenModal] = useState(false);
 
   useEffect(() => {
     getProductsData();
   }, []);
+
+  const handleAddToCart = (product) => {
+    handleOpenModal();
+    sentCurrentProductData(product);
+  };
+
+  const sentCurrentProductData = (product) => {
+    setCurrentProductData(product);
+    // console.log(currentProductData);
+  };
+
+  const handleOpenModal = () => {
+    setIsOpenModal(true);
+  };
 
   const getProductsData = async () => {
     const productsData = await axios.get("http://localhost:3020/data");
@@ -65,14 +80,16 @@ const Index = () => {
           <ul className="prods-list padding-md">
             {productsData &&
               productsData.map((product) => {
-                console.log(product);
+                console.log("hi");
                 return (
                   <li>
                     <div className="prod-box m-bottom-md">
                       <div className="prod-img-box">
-                        <a href="/">
-                          <img src={product.image} alt="" />
-                        </a>
+                        <img
+                          src={product.image}
+                          alt={product.image}
+                          title={product.image}
+                        />
                       </div>
                       <div className="prod-info padding-lg">
                         <h3 className="prod-title m-bottom-sm">
@@ -86,8 +103,10 @@ const Index = () => {
                         </div>
                       </div>
                       <button
-                        className="add-to-cart padding-xs d-flex justify-content-center align-items-center"
-                        onClick={handleAddToCart}>
+                        className="add-to-cart fz-12 padding-xs d-flex justify-content-center align-items-center"
+                        onClick={() => {
+                          handleAddToCart(product);
+                        }}>
                         <img
                           className="m-right-xs"
                           src={ShoppingBag}
@@ -95,15 +114,14 @@ const Index = () => {
                           width="20"
                           height="20"
                         />
-                        <a href="" className="fz-12">
-                          ADD TO CART
-                        </a>
+                        ADD TO CART
                       </button>
                     </div>
                   </li>
                 );
               })}
           </ul>
+          <Modal open={isOpenModal} />
         </div>
       </main>
     </div>
