@@ -1,16 +1,17 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-import Modal from "../components/Modal";
-import Portal from "../components/Portal";
+import Header from "../components/Header";
+import Modal from "../components/Modal/Modal";
 
-import LogoIcon from "../images/Logo.svg";
 import ShoppingBag from "../images/ShoppingBag.svg";
 
 const Index = () => {
   const [productsData, setProductsData] = useState([]);
-  const [currentProductData, setCurrentProductData] = useState(null);
+  const [selectedProductData, setSelectedProductData] = useState(null);
+  const [orderInfo, setOrderInfo] = useState({});
   const [isOpenModal, setIsOpenModal] = useState(false);
+  const [inputVal, setInputVal] = useState(0);
 
   useEffect(() => {
     getProductsData();
@@ -18,16 +19,15 @@ const Index = () => {
 
   const handleAddToCart = (product) => {
     handleOpenModal();
-    sentCurrentProductData(product);
-  };
-
-  const sentCurrentProductData = (product) => {
-    setCurrentProductData(product);
-    // console.log(currentProductData);
+    getCurrentProductData(product);
   };
 
   const handleOpenModal = () => {
     setIsOpenModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsOpenModal(false);
   };
 
   const getProductsData = async () => {
@@ -35,54 +35,32 @@ const Index = () => {
     setProductsData(productsData.data);
   };
 
+  const getCurrentProductData = (product) => {
+    console.log(product);
+    setSelectedProductData(product);
+  };
+
+  const saveOrderInfo = (selectedProductData) => {
+    console.log("hoii");
+    console.log(orderInfo);
+    setOrderInfo({
+      name: selectedProductData.name,
+      sweetness: "test",
+      sizes: "test",
+    });
+  };
+
   return (
     <div className="wrapper">
-      <header>
-        <nav className="navbar padding-xl d-flex align-items-center justify-content-between">
-          <div>
-            <a href="/" className="d-flex align-items-center">
-              <img
-                src={LogoIcon}
-                alt="Территория вкуса"
-                title="Территория вкуса "
-                className="d-block m-right-md"
-              />
-              <h2 className="fz-bold-24">Территория вкуса</h2>
-            </a>
-          </div>
-          <ul className="d-flex">
-            <li>
-              <a href="/" className="fz-14 m-right-md ">
-                HOME
-              </a>
-            </li>
-            <li>
-              <a href="/" className="fz-14 m-right-md">
-                ABOUT US
-              </a>
-            </li>
-            <li>
-              <a href="/" className="fz-14 m-right-md">
-                DELIVERY
-              </a>
-            </li>
-            <li>
-              <a href="/" className="fz-14 m-right-md">
-                CONTACT
-              </a>
-            </li>
-          </ul>
-        </nav>
-      </header>
+      <Header />
       <main>
         <div className="prods-container container d-flex align-items-center flex-column ">
           <h2 className="m-bottom-lg">Products</h2>
           <ul className="prods-list padding-md">
             {productsData &&
               productsData.map((product) => {
-                console.log("hi");
                 return (
-                  <li>
+                  <li key={product.id}>
                     <div className="prod-box m-bottom-md">
                       <div className="prod-img-box">
                         <img
@@ -114,14 +92,70 @@ const Index = () => {
                           width="20"
                           height="20"
                         />
-                        ADD TO CART
+                        Order Now
                       </button>
                     </div>
                   </li>
                 );
               })}
           </ul>
-          <Modal open={isOpenModal} />
+          <Modal isVisible={isOpenModal} onClose={handleCloseModal}>
+            {selectedProductData && (
+              <div className="selected-prod-wrapper">
+                <div className="selected-prod-img-box">
+                  <img
+                    src={selectedProductData.image}
+                    alt=""
+                    width="100%"
+                    height="100%"
+                  />
+                </div>
+                <div className="selected-prod-info">
+                  <h1>{selectedProductData.name}</h1>
+                  <div>{selectedProductData.description}</div>
+                </div>
+                <ul className="selected-prod-topping-list">
+                  <li>
+                    <div>
+                      <div>
+                        <div>尺寸</div>
+                        <div>必填</div>
+                      </div>
+                      <div>
+                        <input type="radio" name="sizes" id="lg" />
+                        <label htmlFor="sizes">大</label>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div>
+                      <div>選擇甜度</div>
+                      <div>必填</div>
+                    </div>
+                    <div>
+                      <input
+                        type="radio"
+                        name="sweetness"
+                        id="100%-Sugar"
+                        value={inputVal}
+                      />
+                      <label htmlFor="sweetness">正常糖</label>
+                    </div>
+                  </li>
+                </ul>
+                <div>
+                  <button>-</button>
+                  <div>qty</div>
+                  <button>+</button>
+                </div>
+                <div>
+                  <button onClick={(selectedProductData)=>{
+                    saveOrderInfo(selectedProductData)
+                  }}>send</button>
+                </div>
+              </div>
+            )}
+          </Modal>
         </div>
       </main>
     </div>
