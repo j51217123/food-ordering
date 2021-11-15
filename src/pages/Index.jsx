@@ -9,26 +9,14 @@ import ShoppingBag from "../images/ShoppingBag.svg";
 const Index = () => {
   const [productsData, setProductsData] = useState([]);
   const [selectedProductData, setSelectedProductData] = useState(null);
-  const [orderInfo, setOrderInfo] = useState({});
   const [isOpenModal, setIsOpenModal] = useState(false);
-  const [inputVal, setInputVal] = useState(0);
+  const [orderInfo, setOrderInfo] = useState([]);
+  const [sweetness, setSweetness] = useState(0);
+  const [size, setSize] = useState(null);
 
   useEffect(() => {
     getProductsData();
   }, []);
-
-  const handleAddToCart = (product) => {
-    handleOpenModal();
-    getCurrentProductData(product);
-  };
-
-  const handleOpenModal = () => {
-    setIsOpenModal(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsOpenModal(false);
-  };
 
   const getProductsData = async () => {
     const productsData = await axios.get("http://localhost:3020/data");
@@ -40,14 +28,41 @@ const Index = () => {
     setSelectedProductData(product);
   };
 
-  const saveOrderInfo = (selectedProductData) => {
-    console.log("hoii");
-    console.log(orderInfo);
-    setOrderInfo({
-      name: selectedProductData.name,
-      sweetness: "test",
-      sizes: "test",
-    });
+  const handleOpenModal = () => {
+    setIsOpenModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsOpenModal(false);
+  };
+
+  const handleSelectedSweetness = (e) => {
+    setSweetness(e.target.id);
+  };
+
+  const handleSelectedSize = (e) => {
+    setSize(e.target.id);
+  };
+
+  const handleAddToCart = (product) => {
+    handleOpenModal();
+    getCurrentProductData(product);
+  };
+
+  const saveOrderInfo = (selectedProductName) => {
+    const singleOrderInfo = {
+      name: selectedProductName,
+      sweetness: sweetness,
+      size: size,
+    };
+
+    if (orderInfo === []) {
+      setOrderInfo(singleOrderInfo);
+    } else {
+      setOrderInfo([...orderInfo, singleOrderInfo]);
+    }
+    console.log(orderInfo, "orderInfo");
+    // localStorage.setItem("orderInfo", JSON.stringify({ ...orderInfo }));
   };
 
   return (
@@ -122,8 +137,27 @@ const Index = () => {
                         <div>必填</div>
                       </div>
                       <div>
-                        <input type="radio" name="sizes" id="lg" />
+                        <input
+                          type="radio"
+                          name="sizes"
+                          id="lg"
+                          onClick={handleSelectedSize}
+                        />
                         <label htmlFor="sizes">大</label>
+                        <input
+                          type="radio"
+                          name="sizes"
+                          id="md"
+                          onClick={handleSelectedSize}
+                        />
+                        <label htmlFor="sizes">中</label>
+                        <input
+                          type="radio"
+                          name="sizes"
+                          id="sm"
+                          onClick={handleSelectedSize}
+                        />
+                        <label htmlFor="sizes">小</label>
                       </div>
                     </div>
                   </li>
@@ -137,9 +171,16 @@ const Index = () => {
                         type="radio"
                         name="sweetness"
                         id="100%-Sugar"
-                        value={inputVal}
+                        onClick={handleSelectedSweetness}
                       />
                       <label htmlFor="sweetness">正常糖</label>
+                      <input
+                        type="radio"
+                        name="sweetness"
+                        id="50%-Sugar"
+                        onClick={handleSelectedSweetness}
+                      />
+                      <label htmlFor="sweetness">半糖</label>
                     </div>
                   </li>
                 </ul>
@@ -149,9 +190,13 @@ const Index = () => {
                   <button>+</button>
                 </div>
                 <div>
-                  <button onClick={(selectedProductData)=>{
-                    saveOrderInfo(selectedProductData)
-                  }}>send</button>
+                  <button
+                    onClick={() => {
+                      let selectedProductName = selectedProductData.name;
+                      saveOrderInfo(selectedProductName);
+                    }}>
+                    send
+                  </button>
                 </div>
               </div>
             )}
