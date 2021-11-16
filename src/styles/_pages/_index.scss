@@ -1,31 +1,3 @@
-.wrapper{
-    max-width: 1440px;
-    margin: auto;
-}
-
-.container{
-    max-width: 100%;
-}
-
-.navbar {
-    width: 100%;
-    background-color: $secondary;
-    
-    h2{
-        color: $white;
-    }
-
-    ul {
-        li {
-            a{
-                &:hover{
-                    color: $primary;
-                }
-            }
-        }
-    }
-}
-
 .prods-container{
     background-color: $secondary;
     color: $white;
@@ -120,37 +92,3 @@
 
     }
 }
-
-// order1 ---  {
-//     drink1:{
-//       name: black tea
-//       sugar:little
-//       ice: little
-//       cups: 2
-//     },
-//     drink2:{
-//       name: grean tea
-//       sugar:little
-//       ice: little
-//       cups:3
-//     }
-//     }
-
-// onClick={(e) => {
-//     handlePostComment(e, image, articleId, content, email).then((c) => {
-//       if (email === "") {
-//         console.log(postData, "This is postData");
-//         console.log(c, "This is C");
-//         alert("請先進行登入動作，謝謝！");
-//         setContent("");
-//         setPreviewImgUrl("");
-//       } else if (postData.comment) {
-//         setPostData({ ...postData, comment: [...postData.comment, c] });
-//         setContent("");
-//         setPreviewImgUrl("");
-//       } else {
-//         setPostData({ ...postData, comment: [c] });
-//         setContent("");
-//         setPreviewImgUrl("");
-//       }
-//     });

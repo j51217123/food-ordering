@@ -18,11 +18,13 @@
 @import './_commons/constant';
 @import './_commons/breakpoint';
 @import './_commons/display';
+@import './_commons/layout';
 
 // ==========================================================================
 // Import component folder
 // ==========================================================================
 @import './_components/modal';
+@import './_components/header';
 
 // ==========================================================================
 // Import pages folder

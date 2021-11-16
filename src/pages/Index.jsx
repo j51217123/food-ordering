@@ -3,6 +3,7 @@ import axios from "axios";
 
 import Header from "../components/Header";
 import Modal from "../components/Modal/Modal";
+import Content from "../components/Modal/Content";
 
 import ShoppingBag from "../images/ShoppingBag.svg";
 
@@ -10,9 +11,6 @@ const Index = () => {
   const [productsData, setProductsData] = useState([]);
   const [selectedProductData, setSelectedProductData] = useState(null);
   const [isOpenModal, setIsOpenModal] = useState(false);
-  const [orderInfo, setOrderInfo] = useState([]);
-  const [sweetness, setSweetness] = useState(0);
-  const [size, setSize] = useState(null);
 
   useEffect(() => {
     getProductsData();
@@ -36,38 +34,13 @@ const Index = () => {
     setIsOpenModal(false);
   };
 
-  const handleSelectedSweetness = (e) => {
-    setSweetness(e.target.id);
-  };
-
-  const handleSelectedSize = (e) => {
-    setSize(e.target.id);
-  };
-
   const handleAddToCart = (product) => {
     handleOpenModal();
     getCurrentProductData(product);
   };
 
-  const saveOrderInfo = (selectedProductName) => {
-    const singleOrderInfo = {
-      name: selectedProductName,
-      sweetness: sweetness,
-      size: size,
-    };
-
-    if (orderInfo === []) {
-      setOrderInfo(singleOrderInfo);
-    } else {
-      setOrderInfo([...orderInfo, singleOrderInfo]);
-    }
-    console.log(orderInfo, "orderInfo");
-    // localStorage.setItem("orderInfo", JSON.stringify({ ...orderInfo }));
-  };
-
   return (
     <div className="wrapper">
-      <Header />
       <main>
         <div className="prods-container container d-flex align-items-center flex-column ">
           <h2 className="m-bottom-lg">Products</h2>
@@ -116,89 +89,10 @@ const Index = () => {
           </ul>
           <Modal isVisible={isOpenModal} onClose={handleCloseModal}>
             {selectedProductData && (
-              <div className="selected-prod-wrapper">
-                <div className="selected-prod-img-box">
-                  <img
-                    src={selectedProductData.image}
-                    alt=""
-                    width="100%"
-                    height="100%"
-                  />
-                </div>
-                <div className="selected-prod-info">
-                  <h1>{selectedProductData.name}</h1>
-                  <div>{selectedProductData.description}</div>
-                </div>
-                <ul className="selected-prod-topping-list">
-                  <li>
-                    <div>
-                      <div>
-                        <div>尺寸</div>
-                        <div>必填</div>
-                      </div>
-                      <div>
-                        <input
-                          type="radio"
-                          name="sizes"
-                          id="lg"
-                          onClick={handleSelectedSize}
-                        />
-                        <label htmlFor="sizes">大</label>
-                        <input
-                          type="radio"
-                          name="sizes"
-                          id="md"
-                          onClick={handleSelectedSize}
-                        />
-                        <label htmlFor="sizes">中</label>
-                        <input
-                          type="radio"
-                          name="sizes"
-                          id="sm"
-                          onClick={handleSelectedSize}
-                        />
-                        <label htmlFor="sizes">小</label>
-                      </div>
-                    </div>
-                  </li>
-                  <li>
-                    <div>
-                      <div>選擇甜度</div>
-                      <div>必填</div>
-                    </div>
-                    <div>
-                      <input
-                        type="radio"
-                        name="sweetness"
-                        id="100%-Sugar"
-                        onClick={handleSelectedSweetness}
-                      />
-                      <label htmlFor="sweetness">正常糖</label>
-                      <input
-                        type="radio"
-                        name="sweetness"
-                        id="50%-Sugar"
-                        onClick={handleSelectedSweetness}
-                      />
-                      <label htmlFor="sweetness">半糖</label>
-                    </div>
-                  </li>
-                </ul>
-                <div>
-                  <button>-</button>
-                  <div>qty</div>
-                  <button>+</button>
-                </div>
-                <div>
-                  <button
-                    onClick={() => {
-                      let selectedProductName = selectedProductData.name;
-                      saveOrderInfo(selectedProductName);
-                    }}>
-                    send
-                  </button>
-                </div>
-              </div>
+              <Content
+                onClose={handleCloseModal}
+                selectedProductData={selectedProductData}
+              />
             )}
           </Modal>
         </div>

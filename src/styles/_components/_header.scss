@@ -1,0 +1,18 @@
+.navbar {
+    width: 100%;
+    background-color: $secondary;
+    
+    h2{
+        color: $white;
+    }
+
+    ul {
+        li {
+            a{
+                &:hover{
+                    color: $primary;
+                }
+            }
+        }
+    }
+}
