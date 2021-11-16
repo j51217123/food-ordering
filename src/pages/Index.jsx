@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-import Header from "../components/Header";
 import Modal from "../components/Modal/Modal";
 import Content from "../components/Modal/Content";
 

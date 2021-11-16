@@ -1,8 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import ShoppingCart from "./ShoppingCart";
-
 import LogoIcon from "../images/Logo.svg";
 
 const Header = () => {
