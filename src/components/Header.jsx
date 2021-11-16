@@ -1,13 +1,16 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
+import ShoppingCart from "./ShoppingCart";
 
 import LogoIcon from "../images/Logo.svg";
 
 const Header = () => {
   return (
-    <header>
+    <header className="wrapper">
       <nav className="navbar padding-xl d-flex align-items-center justify-content-between">
         <div>
-          <a href="/" className="d-flex align-items-center">
+          <Link to="/" className="d-flex align-items-center">
             <img
               src={LogoIcon}
               alt="Территория вкуса"
@@ -15,28 +18,33 @@ const Header = () => {
               className="d-block m-right-md"
             />
             <h2 className="fz-bold-24">Территория вкуса</h2>
-          </a>
+          </Link>
         </div>
         <ul className="d-flex">
           <li>
-            <a href="/" className="fz-14 m-right-md ">
+            <Link to="/" className="fz-14 m-right-md ">
               HOME
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="/" className="fz-14 m-right-md">
+            <Link to="/" className="fz-14 m-right-md">
               ABOUT US
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="/" className="fz-14 m-right-md">
+            <Link to="/" className="fz-14 m-right-md">
               DELIVERY
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="/" className="fz-14 m-right-md">
+            <Link to="/" className="fz-14 m-right-md">
               CONTACT
-            </a>
+            </Link>
+          </li>
+          <li>
+            <Link to="/shoppingCart" className="fz-14 m-right-md">
+              SHOPPING CART
+            </Link>
           </li>
         </ul>
       </nav>
