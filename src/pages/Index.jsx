@@ -39,7 +39,7 @@ const Index = () => {
   const initialProductList = async () => {
     const productsData = await fetchProductsData();
     console.log(productsData, "productsData");
-    dispatch(setProductsData(123)); // 丟的是 value
+    dispatch(setProductsData(productsData)); // 丟的是 key value 中的 value
     // dispatch({ type: "GET_PRODUCTS_DATA", data: productsData });
     // dispatch(actions.update(productsData.data));
   };
