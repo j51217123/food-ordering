@@ -18,9 +18,10 @@ import ShoppingBag from "../images/ShoppingBag.svg";
 //
 const Index = () => {
   const dispatch = useDispatch();
-  const productsData = useSelector((state) => state.product.productsData);
-  // store.product.productsData
-
+  const productsData = useSelector((state) => {
+    console.log(state, "state");
+    return state.product.productsData; // store.product.productsData
+  });
   // const [productsData, setProductsData] = useState([]);
   const [selectedProductData, setSelectedProductData] = useState(null);
   const [isOpenModal, setIsOpenModal] = useState(false);
