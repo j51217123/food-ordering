@@ -18,10 +18,9 @@ import ShoppingBag from "../images/ShoppingBag.svg";
 //
 const Index = () => {
   const dispatch = useDispatch();
-  const productsData = useSelector((state) => {
-    console.log(state, "state");
-    return state.product.productsData; // store.product.productsData
-  });
+  const productsData = useSelector((state) => state.product.productsData);
+  // store.product.productsData
+
   // const [productsData, setProductsData] = useState([]);
   const [selectedProductData, setSelectedProductData] = useState(null);
   const [isOpenModal, setIsOpenModal] = useState(false);
@@ -39,7 +38,7 @@ const Index = () => {
   const initialProductList = async () => {
     const productsData = await fetchProductsData();
     console.log(productsData, "productsData");
-    dispatch(setProductsData(123)); // 丟的是 value
+    dispatch(setProductsData(productsData)); // 丟的是 key value 中的 value
     // dispatch({ type: "GET_PRODUCTS_DATA", data: productsData });
     // dispatch(actions.update(productsData.data));
   };
