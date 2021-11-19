@@ -1,6 +1,10 @@
 import React from "react";
 
+// import { useSelector } from "react-redux";
+
 const ShoppingCart = () => {
+  // const ordersInfo = useSelector((state) => state.ordersInfo);
+
   return (
     <div className="wrapper">
       <div className="shopping-cart-container padding-xl">
@@ -8,7 +12,9 @@ const ShoppingCart = () => {
         <div>
           <div>
             <ul className="order-list">
-              <li></li>
+              <li>
+               
+              </li>
             </ul>
           </div>
           <div></div>

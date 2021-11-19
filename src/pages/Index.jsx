@@ -1,24 +1,61 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+// import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
 
 import Modal from "../components/Modal/Modal";
 import Content from "../components/Modal/Content";
-
+import { fetchProductsData } from "../utils/firebase";
+import { setProductsData } from "../redux/product/ProductSlice";
 import ShoppingBag from "../images/ShoppingBag.svg";
 
+// action.js
+// const productActions 可自定義 = {
+//   update (setProductsData)可自定義 : (data) => {
+//     return { type: "GET_PRODUCTS_DATA", data };
+//   },
+// };
+
+//
 const Index = () => {
-  const [productsData, setProductsData] = useState([]);
+  const dispatch = useDispatch();
+  const productsData = useSelector((state) => {
+    console.log(state, "state");
+    return state.product.productsData; // store.product.productsData
+  });
+  // const [productsData, setProductsData] = useState([]);
   const [selectedProductData, setSelectedProductData] = useState(null);
   const [isOpenModal, setIsOpenModal] = useState(false);
 
-  useEffect(() => {
-    getProductsData();
-  }, []);
+  // useEffect(() => {
+  //   getProductsData();
 
-  const getProductsData = async () => {
-    const productsData = await axios.get("http://localhost:3020/data");
-    setProductsData(productsData.data);
+  // }, []);
+
+  useEffect(() => {
+    initialProductList();
+  }, []);
+  // {data:productsData}
+  // >>action{payload:{data:productsData}}
+  const initialProductList = async () => {
+    const productsData = await fetchProductsData();
+    console.log(productsData, "productsData");
+    dispatch(setProductsData(123)); // 丟的是 value
+    // dispatch({ type: "GET_PRODUCTS_DATA", data: productsData });
+    // dispatch(actions.update(productsData.data));
   };
+
+  // const getProductsData = async () => {
+  //   // const productsData = await axios.get("http://localhost:3020/data");
+  //   const productsData = await axios.get("http://localhost:3020/data");
+  //   // const dataa = await getProductsData();
+  //   dispatch(actions.update(productsData.data));
+  //   // setProductsData(productsData.data);
+  // };
+
+  // const testFn = async () => {
+  //   const dataa = await getProductsData();
+  //   dispatch({ type: "GET_OREDERSINFO", data: dataa });
+  // };
 
   const getCurrentProductData = (product) => {
     console.log(product);
