@@ -5,7 +5,7 @@ const Content = ({ selectedProductData, onClose }) => {
   const [sweetness, setSweetness] = useState(0);
   const [size, setSize] = useState(null);
   const [quantity, setQuantity] = useState(1);
-  const [ordersInfo, setOrdersInfo] = useState([]);
+  // const [ordersInfo, setOrdersInfo] = useState([]);
 
   const handleCloseModal = () => {
     onClose && onClose();
@@ -36,11 +36,9 @@ const Content = ({ selectedProductData, onClose }) => {
   };
 
   const sentOrderInfoToLocalStorage = () => {
-    let newOrdersInfo = [...ordersInfo, currentOrderInfo];
-
-    setOrdersInfo(newOrdersInfo);
-
-    localStorage.setItem("orderInfo", JSON.stringify(newOrdersInfo));
+    // let newOrdersInfo = [...ordersInfo, currentOrderInfo];
+    // setOrdersInfo(newOrdersInfo);
+    // localStorage.setItem("orderInfo", JSON.stringify(newOrdersInfo));
   };
 
   return (
