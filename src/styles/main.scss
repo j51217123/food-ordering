@@ -23,11 +23,14 @@
 // ==========================================================================
 // Import component folder
 // ==========================================================================
-@import './_components/modal';
+@import './_components/_modal/modal';
+@import './_components/_modal/content';
 @import './_components/header';
-@import './_components/shoppingcart';
+
 
 // ==========================================================================
 // Import pages folder
 // ==========================================================================
 @import './_pages/index';
+@import './_pages/_shoppingcart/shoppingcart';
+@import './_pages/_login/login';

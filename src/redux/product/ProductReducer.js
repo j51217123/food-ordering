@@ -1,7 +1,7 @@
 export const GET_PRODUCTS_DATA = "GET_PRODUCTS_DATA";
 // all product [{},{},{}]
-// selectedproduct {}
-// orderlist [{},{},{}]
+// selectedproduct {} // 優化項目 shopping cart qty 顯示
+// orderlist [{},{},{}] 
 
 const initialState = {
   productsData: [],

@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import LogoIcon from "../images/Logo.svg";
 
 const Header = () => {
+  const [click, setClick] = useState(true);
+
+  const testFn = () => {
+    console.log(click, "before");
+    setClick((prevState) => !prevState);
+    console.log(click, "after");
+  };
+
   return (
     <header className="wrapper">
       <nav className="navbar padding-xl d-flex align-items-center justify-content-between">
@@ -18,7 +26,19 @@ const Header = () => {
             <h2 className="fz-bold-24">Территория вкуса</h2>
           </Link>
         </div>
-        <ul className="d-flex">
+        <label htmlFor="menu-control" className="menu-control">
+          <span className="fz-24">☰</span>
+        </label>
+        <input
+          type="checkbox"
+          id="menu-control"
+          onChange={testFn}
+          checked={!click}
+        />
+
+        <ul
+          // style={{ display: click ? "none" : "block" }}
+          onClick={testFn}>
           <li>
             <Link to="/" className="fz-14 m-right-md ">
               HOME
@@ -35,8 +55,8 @@ const Header = () => {
             </Link>
           </li>
           <li>
-            <Link to="/" className="fz-14 m-right-md">
-              CONTACT
+            <Link to="/login" className="fz-14 m-right-md">
+              LOGIN
             </Link>
           </li>
           <li>

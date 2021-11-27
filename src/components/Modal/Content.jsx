@@ -1,8 +1,13 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import { setOrderList } from "../../redux/product/ProductSlice";
 
 const Content = ({ selectedProductData, onClose }) => {
   let currentOrderInfo = {};
-  const [sweetness, setSweetness] = useState(0);
+  const dispatch = useDispatch();
+  const orderListData = useSelector((state) => state.product.orderList);
+  const [sweetness, setSweetness] = useState(null);
   const [size, setSize] = useState(null);
   const [quantity, setQuantity] = useState(1);
   // const [ordersInfo, setOrdersInfo] = useState([]);
@@ -12,11 +17,11 @@ const Content = ({ selectedProductData, onClose }) => {
   };
 
   const handleSelectedSweetness = (e) => {
-    setSweetness(e.target.id);
+    setSweetness(e.target.value);
   };
 
   const handleSelectedSize = (e) => {
-    setSize(e.target.id);
+    setSize(e.target.value);
   };
 
   const handleIncrement = () => {
@@ -27,15 +32,21 @@ const Content = ({ selectedProductData, onClose }) => {
     setQuantity(quantity - 1);
   };
 
-  const saveCurrentOrderInfo = (selectedProductName) => {
-    currentOrderInfo = {
-      name: selectedProductName,
-      sweetness: sweetness,
+  const saveCurrentOrderInfo = ({ productInfo }) => {
+    return (currentOrderInfo = {
+      name: productInfo.name,
+      id: productInfo.id,
+      image: `${productInfo.image}`,
+      price: productInfo.price,
       size: size,
-    };
+      sweetness: sweetness,
+      quantity: quantity,
+    });
   };
 
-  const sentOrderInfoToLocalStorage = () => {
+  const saveOrderInfoToStore = () => {
+    dispatch(setOrderList(currentOrderInfo)); // 丟的是 key value 中的 value
+
     // let newOrdersInfo = [...ordersInfo, currentOrderInfo];
     // setOrdersInfo(newOrdersInfo);
     // localStorage.setItem("orderInfo", JSON.stringify(newOrdersInfo));
@@ -46,89 +57,142 @@ const Content = ({ selectedProductData, onClose }) => {
       <div className="selected-prod-img-box">
         <img
           src={selectedProductData.image}
-          alt=""
-          width="100%"
-          height="100%"
+          alt={selectedProductData.name}
+          title={selectedProductData.name}
+          height="300px"
         />
       </div>
       <div className="selected-prod-info">
-        <h1>{selectedProductData.name}</h1>
-        <div>{selectedProductData.description}</div>
+        <h1 className="fz-24 m-bottom-sm">{selectedProductData.name}</h1>
+        <p className="fz-15">{selectedProductData.description}</p>
       </div>
       <ul className="selected-prod-topping-list">
         <li>
           <div>
-            <div>
-              <div>尺寸</div>
-              <div>必填</div>
+            <div className="topping-title">
+              <h1 className="fz-18">尺寸選擇</h1>
+              <span className="fz-14">必填</span>
             </div>
-            <div>
-              <input
-                type="radio"
-                name="sizes"
-                id="lg"
-                onClick={handleSelectedSize}
-              />
-              <label htmlFor="sizes">大</label>
-              <input
-                type="radio"
-                name="sizes"
-                id="md"
-                onClick={handleSelectedSize}
-              />
-              <label htmlFor="sizes">中</label>
-              <input
-                type="radio"
-                name="sizes"
-                id="sm"
-                onClick={handleSelectedSize}
-              />
-              <label htmlFor="sizes">小</label>
+            <div className="topping-field">
+              <div className="topping-label-box">
+                <label className="d-flex align-items-center">
+                  <input
+                    type="radio"
+                    name="sizes"
+                    value="lg"
+                    className="m-right-xs"
+                    onChange={handleSelectedSize}
+                  />
+                  <span>大</span>
+                </label>
+              </div>
+              <div className="topping-label-box">
+                <label className="d-flex align-items-center">
+                  <input
+                    type="radio"
+                    name="sizes"
+                    value="md"
+                    className="m-right-xs"
+                    onChange={handleSelectedSize}
+                  />
+                  中
+                </label>
+              </div>
+              <div className="topping-label-box">
+                <label className="d-flex align-items-center">
+                  <input
+                    type="radio"
+                    name="sizes"
+                    value="sm"
+                    className="m-right-xs"
+                    onChange={handleSelectedSize}
+                  />
+                  小
+                </label>
+              </div>
             </div>
           </div>
         </li>
         <li>
-          <div>
-            <div>選擇甜度</div>
-            <div>必填</div>
+          <div className="topping-title">
+            <h1 className="fz-18">甜度選擇</h1>
+            <span className="fz-14">必填</span>
           </div>
-          <div>
-            <input
-              type="radio"
-              name="sweetness"
-              id="100%-Sugar"
-              onClick={handleSelectedSweetness}
-            />
-            <label htmlFor="sweetness">正常糖</label>
-            <input
-              type="radio"
-              name="sweetness"
-              id="50%-Sugar"
-              onClick={handleSelectedSweetness}
-            />
-            <label htmlFor="sweetness">半糖</label>
+          <div className="topping-field">
+            <div className="topping-label-box">
+              <label className="d-flex align-items-center">
+                <input
+                  type="radio"
+                  name="sweetness"
+                  value="100%-Sugar"
+                  className="m-right-xs"
+                  onChange={handleSelectedSweetness}
+                />
+                正常糖
+              </label>
+            </div>
+            <div className="topping-label-box">
+              <label className="d-flex align-items-center">
+                <input
+                  type="radio"
+                  name="sweetness"
+                  value="50%-Sugar"
+                  className="m-right-xs"
+                  onChange={handleSelectedSweetness}
+                />
+                半糖
+              </label>
+            </div>
+            <div className="topping-label-box">
+              <label className="d-flex align-items-center">
+                <input
+                  type="radio"
+                  name="sweetness"
+                  value="30%-Sugar"
+                  className="m-right-xs"
+                  onChange={handleSelectedSweetness}
+                />
+                微糖 - 30%
+              </label>
+            </div>
           </div>
         </li>
       </ul>
-      <div>
-        <button
-          onClick={handleDecrement}
-          disabled={quantity === 1 ? true : false}>
-          -
-        </button>
-        <div>{quantity}</div>
-        <button onClick={handleIncrement}>+</button>
-      </div>
-      <div>
-        <button
-          onClick={() => {
-            let selectedProductName = selectedProductData.name;
-            saveCurrentOrderInfo(selectedProductName);
-            sentOrderInfoToLocalStorage();
-            handleCloseModal();
-          }}>
-          send
-        </button>
+      <div className="d-flex justify-content-between align-items-center">
+        <div className="qty-calc-btns d-flex">
+          <button
+            className="btn"
+            onClick={handleDecrement}
+            disabled={quantity === 1 ? true : false}>
+            -
+          </button>
+          <div className="qty-text">{quantity}</div>
+          <button className="btn" onClick={handleIncrement}>
+            +
+          </button>
+        </div>
+        <div className="d-flex flex-grow-1">
+          <button
+            className="add-to-cart fz-bold-18"
+            disabled={sweetness && size ? false : true}
+            style={{
+              backgroundColor: sweetness && size ? "#25252D" : "unset",
+              color: sweetness && size ? "white" : "null",
+            }}
+            onClick={() => {
+              let productInfo = {
+                name: selectedProductData.name,
+                id: selectedProductData.id,
+                image: selectedProductData.image,
+                price: selectedProductData.price,
+              };
+              saveCurrentOrderInfo({ productInfo });
+              saveOrderInfoToStore();
+              handleCloseModal();
+            }}>
+            加入購物車
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -18,22 +18,25 @@ import ShoppingBag from "../images/ShoppingBag.svg";
 //
 const Index = () => {
   const dispatch = useDispatch();
-  const productsData = useSelector((state) => {
-    console.log(state, "state");
-    return state.product.productsData; // store.product.productsData
-  });
+  const productsData = useSelector(
+    (state) => state.product.productsData // store.product.productsData
+  );
   // const [productsData, setProductsData] = useState([]);
   const [selectedProductData, setSelectedProductData] = useState(null);
   const [isOpenModal, setIsOpenModal] = useState(false);
+  const [aaa1, setAAA1] = useState(0);
 
   // useEffect(() => {
-  //   getProductsData();
-
-  // }, []);
+  //   // getProductsData(); didmount + didupdate
+  //   setAAA1(aaa1 + 1);
+  //   console.log("hi");
+  // });
 
   useEffect(() => {
-    initialProductList();
+    initialProductList(); //didmount > useEffect fn
+    // console.log("useEffect");
   }, []);
+
   // {data:productsData}
   // >>action{payload:{data:productsData}}
   const initialProductList = async () => {
@@ -79,7 +82,7 @@ const Index = () => {
     <div className="wrapper">
       <main>
         <div className="prods-container container d-flex align-items-center flex-column ">
-          <h2 className="m-bottom-lg">Products</h2>
+          <h2 className="m-bottom-lg">Dessert</h2>
           <ul className="prods-list padding-md">
             {productsData &&
               productsData.map((product) => {
@@ -89,8 +92,8 @@ const Index = () => {
                       <div className="prod-img-box">
                         <img
                           src={product.image}
-                          alt={product.image}
-                          title={product.image}
+                          alt={product.name}
+                          title={product.name}
                         />
                       </div>
                       <div className="prod-info padding-lg">
@@ -105,7 +108,7 @@ const Index = () => {
                         </div>
                       </div>
                       <button
-                        className="add-to-cart fz-12 padding-xs d-flex justify-content-center align-items-center"
+                        className="order-btn fz-12 padding-xs d-flex justify-content-center align-items-center"
                         onClick={() => {
                           handleAddToCart(product);
                         }}>
@@ -124,7 +127,7 @@ const Index = () => {
               })}
           </ul>
           <Modal isVisible={isOpenModal} onClose={handleCloseModal}>
-            {selectedProductData && (
+            {selectedProductData && ( // fix 顯示邏輯丟到 content 裡面
               <Content
                 onClose={handleCloseModal}
                 selectedProductData={selectedProductData}

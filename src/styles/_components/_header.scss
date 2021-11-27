@@ -1,17 +1,93 @@
 .navbar {
     width: 100%;
     background-color: $secondary;
+    position: relative;
+    height: 80px;
     
+    .test-mask{
+        display:none;
+    }
+
     h2{
         color: $white;
+        @include mediaQuery($maxWidth,$breakpoint-sm){
+            font-size: 18px;
+        }
+    }
+
+    .menu-control,
+    #menu-control{
+        display: none;
     }
 
     ul {
+        display: flex;
         li {
             a{
                 &:hover{
                     color: $primary;
                 }
+            }
+        }
+    }
+
+    @include mediaQuery($maxWidth,$breakpoint-lg){
+     
+        ul {
+            position: absolute;
+            top: 80px;
+            left: -300%;
+        }
+
+        
+        .menu-control,
+        #menu-control{
+        display: block;
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        }
+
+        .menu-control span{
+            color: $white;
+            cursor: pointer;
+        }
+
+        #menu-control {
+            z-index: -2;
+        }
+
+        #menu-control:checked + ul {
+            display:block;
+            width: 60%;
+            height: calc(100vh - 80px);
+            position: absolute;
+            top: 80px;
+            left: 0;
+            background-color: $gray;
+            z-index: 3;
+            transition: .5s;
+            
+            li a{
+                display: block;
+                padding: 10px 20px;
+                cursor: pointer;
+
+                &:hover{
+                    margin-right: 0;
+                    color: $secondary;
+                    background-color: $primary;
+                    transition: 0.5s;
+                }
+            }
+
+            @include mediaQuery($maxWidth,$breakpoint-md){
+                width: 80%;
+            }
+
+            @include mediaQuery($maxWidth,$breakpoint-sm){
+                width: 100%;
             }
         }
     }

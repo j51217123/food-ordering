@@ -9,7 +9,7 @@ $minWidth : min-width;
 
 
 @mixin mediaQuery($Width,$breakpoint,) {
-  @media (#{$width}: $breakpoint) {
+  @media ($Width: $breakpoint) {
     @content;
   }
 }
