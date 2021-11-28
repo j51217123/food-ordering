@@ -50,13 +50,13 @@ const Header = () => {
             </Link>
           </li>
           <li>
-            <Link to="/" className="fz-14 m-right-md">
-              DELIVERY
+            <Link to="/login" className="fz-14 m-right-md">
+              LOGIN
             </Link>
           </li>
           <li>
-            <Link to="/login" className="fz-14 m-right-md">
-              LOGIN
+            <Link to="/" className="fz-14 m-right-md">
+              DELIVERY
             </Link>
           </li>
           <li>
