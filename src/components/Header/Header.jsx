@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-import LogoIcon from "../images/Logo.svg";
+import LogoIcon from "../../images/Logo.svg";
 
 const Header = () => {
-  const [click, setClick] = useState(true);
+  const [isVisible, setIsVisible] = useState(true);
 
-  const testFn = () => {
-    console.log(click, "before");
-    setClick((prevState) => !prevState);
-    console.log(click, "after");
+  const handleOpenMenu = () => {
+    console.log(isVisible, "before");
+    setIsVisible((prevState) => !prevState);
+    console.log(isVisible, "after");
   };
 
   return (
@@ -32,13 +32,10 @@ const Header = () => {
         <input
           type="checkbox"
           id="menu-control"
-          onChange={testFn}
-          checked={!click}
+          onChange={handleOpenMenu}
+          checked={!isVisible}
         />
-
-        <ul
-          // style={{ display: click ? "none" : "block" }}
-          onClick={testFn}>
+        <ul className="d-flex" onClick={handleOpenMenu}>
           <li>
             <Link to="/" className="fz-14 m-right-md ">
               HOME
@@ -55,7 +52,7 @@ const Header = () => {
             </Link>
           </li>
           <li>
-            <Link to="/" className="fz-14 m-right-md">
+            <Link to="/delivery" className="fz-14 m-right-md">
               DELIVERY
             </Link>
           </li>

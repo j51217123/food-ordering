@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 // import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 
-import Modal from "../components/Modal/Modal";
-import Content from "../components/Modal/Content";
-import { fetchProductsData } from "../utils/firebase";
-import { setProductsData } from "../redux/product/ProductSlice";
-import ShoppingBag from "../images/ShoppingBag.svg";
+import Modal from "../../components/Modal/Modal";
+import Content from "../../components/Modal/Content";
+import { fetchProductsData } from "../../utils/firebase";
+import { setProductsData } from "../../redux/product/ProductSlice";
+import ShoppingBag from "../../images/ShoppingBag.svg";
 
 // action.js
 // const productActions 可自定義 = {
@@ -127,12 +127,10 @@ const Index = () => {
               })}
           </ul>
           <Modal isVisible={isOpenModal} onClose={handleCloseModal}>
-            {selectedProductData && ( // fix 顯示邏輯丟到 content 裡面
-              <Content
-                onClose={handleCloseModal}
-                selectedProductData={selectedProductData}
-              />
-            )}
+            <Content
+              onClose={handleCloseModal}
+              selectedProductData={selectedProductData}
+            />
           </Modal>
         </div>
       </main>

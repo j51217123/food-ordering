@@ -1,0 +1,173 @@
+.homepage-container{
+    background-color: $secondary-dark;
+
+    .main-banner,
+    .pizza-banner{
+        background-position: center;
+        background-size: cover;
+        position: relative;
+        height: 480px;
+        width: 100%;
+        padding: 3% 7%;
+    }
+
+
+    .main-banner{
+        background-image: url('../../../images/MainBanner.jpg');
+        position: relative;
+
+        >p{
+            font-size: 72px;
+            line-height: 72px;
+            font-weight: 500;
+            text-align: center;
+            color: $secondary-dark;
+
+            @include mediaQuery($maxWidth,$breakpoint-xl){
+                font-size: 36px;
+            }
+        }
+
+        .icons-container{
+            text-align: center;
+            margin-top: 30px;
+
+            .icon-container{
+                width: 33.33333%;
+
+                p{
+                    color: $secondary-dark;
+                }
+                span{
+                    color: $gray;
+                }
+            }
+        }
+    }
+
+    .lunch-container{
+        max-width: 1200px;
+        // width: 100%;
+        // max-height: 550px;
+        padding: 3%;
+        margin: auto;
+        text-align: center;
+        background-color: $secondary;
+        color: $white;
+        position: absolute;
+        top: 45%;
+        left: 50%;
+        transform: translate(-50%, 0%);
+
+        @include mediaQuery($maxWidth,$breakpoint-xl){
+            top: 30%;
+        }
+
+        @include mediaQuery($maxWidth,$breakpoint-lg){
+            top: 37%;
+        }
+
+        .lunch-title{
+            font-size: 36px;
+            font-weight: 600;
+        }
+
+        .lunch-time{
+            margin-bottom: 40px;
+        }
+
+        .lunch-left{
+            width: 50%;
+            text-align: initial;
+            margin-right: 2%;
+
+            .lunch-info {
+                margin-bottom: 30px;
+                
+                h3,
+                p{
+                    line-height: 1.5;
+                }
+    
+                p{
+                    height: 48px;
+                }
+
+                &::after{
+                    content: "";
+                    display: block;
+                    height: 1px;
+                    background: #34C759;
+                }
+
+                @include mediaQuery($maxWidth,$breakpoint-lg){
+               
+                }
+            }
+
+            :nth-child(2){
+
+                p{
+                margin-bottom: 30px;  
+                } 
+            }
+        }
+
+        .lunch-right{
+            width: 48%;
+
+            svg{
+                max-width: 100%;
+            }
+        }
+
+        .book-btn{
+            width: 160px;
+            padding: 4px;
+            margin: 2% auto;
+            border-radius: 10px;
+            border: 1px solid  $white;
+            background-color: $secondary;
+            color: $white;
+        }
+    }
+
+    .test{
+        background-color: $secondary-dark;
+        height: 800px;
+        padding: 0 15%;
+        text-align: center;
+        align-items: flex-end;
+        margin-bottom: 40px;
+
+        @include mediaQuery($maxWidth,$breakpoint-xl){
+            height: 720px;
+        }
+
+        .img-box{
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            color: $white;
+
+            svg{
+                width: 100%;
+                max-width: 119px;
+            }
+
+            @include mediaQuery($maxWidth,$breakpoint-lg){
+                
+                p:nth-child(2){
+                   height: 38px;
+                }
+            }
+        }
+    }
+
+    .pizza-banner{
+        background-image: url('../../../images/PizzaBanner.svg');
+    }
+}
+
