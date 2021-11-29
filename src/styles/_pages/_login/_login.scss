@@ -1,21 +1,34 @@
 .login-page-container{
     background-color: $secondary;
     background-color: gray;
+    height: calc( 100vh - 80px);
     padding: 4%;
-    justify-content: space-evenly;
+    background-image: url('../../../images/Cover.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 
-    .login-cover-img-box{
-
-        img{
-            max-width: 100%;
-            height: 600px;
-        }
+    @include mediaQuery($maxWidth,$breakpoint-lg){
+        padding: 0;
     }
 
     .login-form-container{
         background-color: $white;
         border-radius: 4px;
         padding: 60px 60px 12px;
+
+        @include mediaQuery($maxWidth,$breakpoint-lg){
+            padding: 8%;
+            width: 100vw;
+            height: calc(100vh - 80px);
+        }
+
+        .login-btns-container{
+
+            @include mediaQuery($maxWidth,$breakpoint-lg){
+                max-width: 400px;
+            }
+        }
 
         .facebook-btn,
         .google-btn{
@@ -53,8 +66,19 @@
             }
         }
 
+        .field{
+
+          label{
+
+            @include mediaQuery($maxWidth,$breakpoint-lg){
+                max-width: 400px;
+                width: 100%;
+                margin: unset;
+            }
+          }
+        }
+
         .auth-input{
-            
             min-width: 270px;
             border: none;
             border-radius: 10px;
@@ -90,13 +114,18 @@
             color: $white;
             background-color: $secondary-dark;
             
+            @include mediaQuery($maxWidth,$breakpoint-lg){
+                max-width: 400px;
+            }
+
             &:hover{
                 background-color: $secondary;
             }
         }
 
-        .test{
+        .account-inquire-text{
             color: rgba(0, 0, 0, 0.35);
+            text-align: center;
 
             span{
                 cursor: pointer;

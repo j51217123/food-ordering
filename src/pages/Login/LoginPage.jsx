@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import {
   registerFirebaseAuth,
@@ -7,17 +8,17 @@ import {
   googleSignIn,
 } from "../../utils/firebase";
 
-import CoverImg from "../../images/Cover.jpg";
 import { ReactComponent as FacebookIcon } from "../../images/Facebook.svg";
 import { ReactComponent as GoogleIcon } from "../../images/Google.svg";
 import { ReactComponent as ShownEye } from "../../images/ShownEye.svg";
 import { ReactComponent as CloseEye } from "../../images/CloseEye.svg";
 
 const LoginPage = () => {
+  let navigate = useNavigate();
   const [shownPassword, setShownPassword] = useState(false);
+  const [hasAccount, setHasAccount] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [hasAccount, setHasAccount] = useState(false);
 
   const saveEmailValue = (e) => {
     setEmail(e.target.value);
@@ -39,6 +40,7 @@ const LoginPage = () => {
   const handleSignInAndClearInputs = (email, password) => {
     signInFirebaseAuth(email, password);
     clearInputs();
+    navigate("/delivery");
   };
 
   const handleRegisterAuthAndClearInputs = (email, password) => {
@@ -48,13 +50,10 @@ const LoginPage = () => {
 
   return (
     <div className="wrapper">
-      <div className="login-page-container d-flex">
-        <div className="login-cover-img-box">
-          <img src={CoverImg} alt="" />
-        </div>
-        <div className="login-form">
-          <div className="login-form-container">
-            <div className="login-btns-container d-flex flex-column ">
+      <div className="login-page-container d-flex ">
+        <div className="login-form margin-auto">
+          <div className="login-form-container justify-content-center align-items-center">
+            <div className="login-btns-container margin-auto d-flex flex-column ">
               <button
                 className="facebook-btn d-flex w-100 m-bottom-lg padding-xs"
                 onClick={facebookSignIn}>
@@ -71,24 +70,24 @@ const LoginPage = () => {
                 <span>或</span>
               </div>
             </div>
-            <div>
-              <label>
+            <div className="field d-flex justify-content-center">
+              <label className="margin-auto">
                 <span className="d-block fz-14 m-bottom-sm">常用信箱</span>
                 <input
-                  className="auth-input   padding-sm m-bottom-lg"
+                  className="auth-input w-100 padding-sm m-bottom-lg"
                   type="email"
                   value={email}
                   onChange={saveEmailValue}
-                  placeholder="輸入信箱 / aaa.test.com"
+                  placeholder="輸入信箱 / aaa@test.com"
                 />
               </label>
             </div>
-            <div>
-              <label>
+            <div className="field d-flex justify-content-center">
+              <label className="margin-auto">
                 <span className="d-block fz-14 m-bottom-sm">密碼</span>
-                <div className="input-box d-inline-flex align-items-end m-bottom-lg">
+                <div className="input-box w-100 d-inline-flex align-items-end m-bottom-lg">
                   <input
-                    className="auth-input  padding-sm"
+                    className="auth-input w-100 padding-sm"
                     type={shownPassword ? "text" : "password"}
                     value={password}
                     onChange={savePasswordValue}
@@ -115,29 +114,29 @@ const LoginPage = () => {
               </label>
             </div>
             {hasAccount ? (
-              <>
+              <div className="d-flex flex-column">
                 <button
-                  className="account-btn w-100 padding-sm m-bottom-lg"
-                  onClick={handleSignInAndClearInputs}>
-                  Sign in
-                </button>
-                <p className="test">
-                  Don't have an account ?
-                  <span onClick={handleSetHasAccount}> Sign up</span>
-                </p>
-              </>
-            ) : (
-              <>
-                <button
-                  className="account-btn w-100 padding-sm m-bottom-lg"
+                  className="account-btn w-100 padding-sm margin-auto m-bottom-lg"
                   onClick={handleRegisterAuthAndClearInputs}>
                   Sign up
                 </button>
-                <p className="test">
+                <p className="account-inquire-text fz-14">
                   Already have an account ?
                   <span onClick={handleSetHasAccount}> Sign in</span>
                 </p>
-              </>
+              </div>
+            ) : (
+              <div className="d-flex flex-column">
+                <button
+                  className="account-btn w-100 padding-sm margin-auto m-bottom-lg"
+                  onClick={handleSignInAndClearInputs}>
+                  Sign in
+                </button>
+                <p className="account-inquire-text fz-14">
+                  Don't have an account ?
+                  <span onClick={handleSetHasAccount}> Sign up</span>
+                </p>
+              </div>
             )}
           </div>
         </div>
