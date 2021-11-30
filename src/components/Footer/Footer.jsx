@@ -45,7 +45,6 @@ const Footer = () => {
             </Link>
           </li>
         </ul>
-        <div></div>
       </section>
     </footer>
   );

@@ -6,6 +6,7 @@ import Header from "./components/Header/Header";
 import ShoppingCartPage from "./pages/ShoppingCart/ShoppingCartPage";
 import LoginPage from "./pages/Login/LoginPage";
 import HomePage from "./pages/Home/HomePage";
+import Footer from "./components/Footer/Footer";
 
 import "./styles/main.scss";
 
@@ -19,6 +20,7 @@ export default function App() {
         <Route path="/delivery" element={<DeliveryPage />} />
         <Route path="/" element={<HomePage />} />
       </Routes>
+      <Footer />
     </div>
   );
 }
