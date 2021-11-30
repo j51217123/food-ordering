@@ -17,9 +17,8 @@ export const productSlice = createSlice({
     },
 
     setOrderList: (state, action) => {
-      // fix 同物品不會更新同一筆資料
       console.log(action.payload, "action.payload");
-      // orderList[0] is cake;  cake.id = 2 ; payload.id = 1
+
       if (
         state.orderList.length === 0 ||
         state.orderList.find((product) => product.id !== action.payload.id)
@@ -47,12 +46,12 @@ export const productSlice = createSlice({
 
     setIncrement: (state, action) => {
       const { index } = action.payload;
-      state.orderList[index].quantity += 1;
+      state.orderList[index].quantity = state.orderList[index].quantity + 1;
     },
 
     setDecrement: (state, action) => {
       const { index } = action.payload;
-      state.orderList[index].quantity -= 1;
+      state.orderList[index].quantity = state.orderList[index].quantity - 1;
     },
 
     setRemove: (state, action) => {

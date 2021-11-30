@@ -1,24 +1,55 @@
+.shopping-cart-wrap{
+    background-color: $secondary;
+    height: calc(100vh - 219px);
+}
+
 .shopping-cart-container{
     background-color: $secondary;
     color: $white;
-
-    .shopping-cart-left{
-        width: 50%;
+    @include mediaQuery($maxWidth,$breakpoint-sm){
+        padding:12px;
+    }
 
         .shopping-cart-title{
-            height: 100px;
+            height: 50px;
             font-size: 24px;
         }
 
         .order-list{
-            background-color: black;
-          
+            width: 100%;
+            background-color: $secondary-dark;
         }
 
         .prod-container{
+            width:  700px;
+            max-width: 100%;
+
+            @include mediaQuery($maxWidth,$breakpoint-sm){
+                width: 100%;
+                max-width: 100%;
+                padding: 8px;
+            }
+
+            .prod-img-box{
+                @include mediaQuery($maxWidth,$breakpoint-sm){
+                    display: none;
+                }
+            }
 
             .prod-variations{
-                min-width: 260px;
+                min-width: 200px;
+                @include mediaQuery($maxWidth,$breakpoint-sm){
+                    min-width: 100px;
+                    font-size: 14px;
+                    
+                }
+            }
+
+            .prod-count-container{
+
+                @include mediaQuery($maxWidth,$breakpoint-sm){
+                    margin-right: 10px;
+                }
             }
     
             .btn{
@@ -37,26 +68,28 @@
                 border: 1px solid $white;
                 background-color: $white;
             }
+
+            .prod-price{
+                width: 100%;
+                min-width: 70px;
+                @include mediaQuery($maxWidth,$breakpoint-sm){
+                    min-width: 50px;
+                }
+            }
     
             .btn-remove{
                 width: 40px;
                 height: 40px;
 
                 svg {
-                    // width: 30px;
-                    // height: 30px;
                     fill: white;
                     margin: auto;
                 }
             }
-        }
     }
-    
-    .shopping-cart-right{
 
         .payment-title{
-            height: 100px;
+            height: 50px;
             font-size: 24px;
         }
-    }
 }

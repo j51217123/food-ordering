@@ -7,9 +7,7 @@ const Header = () => {
   const [isVisible, setIsVisible] = useState(true);
 
   const handleOpenMenu = () => {
-    console.log(isVisible, "before");
     setIsVisible((prevState) => !prevState);
-    console.log(isVisible, "after");
   };
 
   return (

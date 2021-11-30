@@ -49,11 +49,10 @@ const HomePage = () => {
             </div>
           </div>
         </div>
-
         <div className="lunch-container">
           <div className="lunch-title m-bottom-md">Бизнес-ланч</div>
           <div className="lunch-time fz-18">заказ до 15:00</div>
-          <div className="d-flex flex-wrap">
+          <div className="lunch-content d-flex flex-wrap">
             <div className="lunch-left d-inline-block">
               <div className="lunch-info">
                 <h3>На первое:</h3>
@@ -80,10 +79,10 @@ const HomePage = () => {
             <div className="lunch-right d-inline-block">
               <LunchImg />
             </div>
-            <button className="book-btn" onClick={handleDelivery}>
-              Book
-            </button>
           </div>
+          <button className="book-btn" onClick={handleDelivery}>
+            Book
+          </button>
         </div>
         <div className="test d-flex w-100 wrapper">
           <div className="img-box">
@@ -100,7 +99,6 @@ const HomePage = () => {
           </div>
         </div>
         <div className="pizza-banner"></div>
-        <Footer />
       </div>
     </section>
   );
